@@ -193,14 +193,16 @@ static MTScanningController *_instance = nil;
             NSLog(@"State: Scanning")
             if (self.scan == nil) {
                 self.scan = [[MTScan alloc] init:self.sceneView];
-//                self.scan
+                self.scan.state = StateReady;
             }
             break;
         }
         case MTStateTesting:
-            <#code#>
+            NSLog(@"State: Testing")
             break;
     }
+    
+    [gNotiCenter postNotificationName:kAppStateChangedNotification object:self userInfo:@{kAppStateUserInfoKey : @(state)}];
 }
 
 #pragma mark - MTPaperViewDelegate
@@ -288,19 +290,50 @@ static MTScanningController *_instance = nil;
     switch (camera.trackingState) {
         case ARTrackingStateNotAvailable:
             NSLog(@"ARTrackingStateNotAvailable")
+            self.state = MTStateNotReady;
             break;
-        case ARTrackingStateLimited:
+        case ARTrackingStateLimited: {
             NSLog(@"ARTrackingStateLimited")
+            switch (self.state) {
+                case MTStateStartARSession:
+                    self.state = MTStateNotReady;
+                    break;
+                case MTStateNotReady:
+                case MTStateTesting:
+                    break;
+                case MTStateScanning: {
+                    if (self.scan) {
+                        switch (self.scan.state) {
+                            case StateReady:
+                                self.state = MTStateNotReady;
+                                break;
+                            case StateDefineBoundingBox:
+                            case StateScanning:
+                            case StateAdjustingOrigin:
+                                NSLog(@"Warning: ARKit is relocalizing")
+                                break;
+                        }
+                    }
+                }
+                    
+                    break;
+            }
             break;
+            
+        }
         case ARTrackingStateNormal: {
             NSLog(@"ARTrackingStateNormal")
-            if (!self.scan) {
-                self.scan = [[MTScan alloc] init:self.sceneView];
-                self.scan.
+            switch (self.state) {
+                case MTStateStartARSession:
+                case MTStateNotReady:
+                    self.state = MTStateScanning;
+                    break;
+                case MTStateScanning:
+                case MTStateTesting:
+                    break;
             }
-        }
-            
             break;
+        }
     }
 }
 

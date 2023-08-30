@@ -66,7 +66,8 @@ class ObjectOrigin: SCNNode {
         addChildNode(yAxis)
         addChildNode(zAxis)
         
-        set3DModel(ViewController.instance?.modelURL, extentForScaling: extent)
+        // 注释
+//        set3DModel(ViewController.instance?.modelURL, extentForScaling: extent)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.scanningStateChanged(_:)),
                                                name: Scan.stateChangedNotification, object: nil)
@@ -80,7 +81,7 @@ class ObjectOrigin: SCNNode {
         customModel = nil
         
         if let url = url, let model = load3DModel(from: url) {
-            ViewController.instance?.sceneView.prepare([model], completionHandler: { _ in
+            MTScanningController.instance?.sceneView!.prepare([model], completionHandler: { _ in
                 self.addChildNode(model)
             })
             customModel = model

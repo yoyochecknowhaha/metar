@@ -16,7 +16,7 @@ import ARKit
     static let stateUserInfoKey = "ScanState"
     static let objectCreationInterval: CFTimeInterval = 1.0
     
-    enum State {
+    @objc enum State : Int {
         case ready
         case defineBoundingBox
         case scanning
@@ -138,9 +138,10 @@ import ARKit
         scannedObject = ScannedObject(sceneView)
         pointCloud = ScannedPointCloud()
         
+        super.init()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.applicationStateChanged(_:)),
-                                               name: NSNotification.Name.appStateChanged,
+                                               name: NSNotification.Name("kAppStateChangedNotification"),
                                                object: nil)
         
         self.sceneView.scene.rootNode.addChildNode(self.scannedObject)
@@ -154,15 +155,23 @@ import ARKit
     
     @objc
     private func applicationStateChanged(_ notification: Notification) {
-        guard let appState = notification.userInfo?[kAppStateUserInfoKey] as? ViewController.State else { return }
-        switch appState {
-        case .scanning:
-            scannedObject.isHidden = false
-            pointCloud.isHidden = false
-        default:
-            scannedObject.isHidden = true
-            pointCloud.isHidden = true
-        }
+        guard let appStateNumber = notification.userInfo?["kAppStateUserInfoKey"] as? NSNumber else { return }
+                if (appStateNumber == 2){
+                    scannedObject.isHidden = false
+                    pointCloud.isHidden = false
+                }else {
+                    scannedObject.isHidden = true
+                    pointCloud.isHidden = true
+                }
+//        guard let appState = notification.userInfo?[kAppStateUserInfoKey] as? ViewController.State else { return }
+//        switch appState {
+//        case .scanning:
+//            scannedObject.isHidden = false
+//            pointCloud.isHidden = false
+//        default:
+//            scannedObject.isHidden = true
+//            pointCloud.isHidden = true
+//        }
     }
     
     func didOneFingerPan(_ gesture: UIPanGestureRecognizer) {
