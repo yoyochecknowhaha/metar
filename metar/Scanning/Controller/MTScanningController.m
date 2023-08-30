@@ -19,7 +19,7 @@
 #import "MTCoachingOverlayView.h"
 
 // model
-#import "MTScan.h"
+#import "metar-Swift.h"
 
 typedef NS_ENUM(NSUInteger, MTCoachingState) {
     MTCoachingStatePlane,       // 扫描平面提示
@@ -31,7 +31,6 @@ typedef NS_ENUM(NSUInteger, MTCoachingState) {
 @interface MTScanningController () <MTPaperViewDelegate, ARSessionDelegate, ARSCNViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *stepBgView;
-@property (weak, nonatomic) IBOutlet ARSCNView *ARSCNView;
 @property (weak, nonatomic) IBOutlet UILabel *plus;
 
 @property (nonatomic, assign) MTCoachingState coachingState;
@@ -39,11 +38,20 @@ typedef NS_ENUM(NSUInteger, MTCoachingState) {
 @property (nonatomic, weak) MTCoachingOverlayView *scanningOverlayView;
 @property (nonatomic, assign) ARTrackingState cameraTrackingState;
 @property (nonatomic, weak) MTStep0View *step0View;
-@property (nonatomic, strong) MTScan *scan;
 
 @end
 
 @implementation MTScanningController
+
+static MTScanningController *_instance = nil;
+
++ (MTScanningController *)instance {
+    return _instance;
+}
+
++ (void)setInstance:(MTScanningController *)instance {
+    _instance = instance;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -95,9 +103,14 @@ typedef NS_ENUM(NSUInteger, MTCoachingState) {
     self.step0View = step0View;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MTScanningController setInstance:self];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.ARSCNView.session pause];
+    [self.sceneView.session pause];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -161,9 +174,9 @@ typedef NS_ENUM(NSUInteger, MTCoachingState) {
 - (void)startScanning {
     ARObjectScanningConfiguration *config = [[ARObjectScanningConfiguration alloc] init];
     config.planeDetection = ARPlaneDetectionHorizontal;
-    [self.ARSCNView.session runWithConfiguration:config];
-    self.ARSCNView.session.delegate = self;
-    self.ARSCNView.delegate = self;
+    [self.sceneView.session runWithConfiguration:config];
+    self.sceneView.session.delegate = self;
+    self.sceneView.delegate = self;
 }
 
 - (void)showPlaneCoachingView {
@@ -171,10 +184,10 @@ typedef NS_ENUM(NSUInteger, MTCoachingState) {
     MTCoachingOverlayView *planeOverlayView = [MTCoachingOverlayView coachingOverlayView];
     planeOverlayView.imageName = @"plane.gif";
     planeOverlayView.title = @"请移动手机开始扫描";
-    [self.ARSCNView addSubview:planeOverlayView];
+    [self.sceneView addSubview:planeOverlayView];
     self.planeOverlayView = planeOverlayView;
     [planeOverlayView makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.ARSCNView);
+        make.edges.equalTo(self.sceneView);
     }];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [planeOverlayView removeFromSuperview];
@@ -187,10 +200,10 @@ typedef NS_ENUM(NSUInteger, MTCoachingState) {
     self.coachingState = MTCoachingStateScanning;
     MTCoachingOverlayView *scanningOverlayView = [MTCoachingOverlayView coachingOverlayView];
     scanningOverlayView.imageName = @"scanning.gif";
-    [self.ARSCNView addSubview:scanningOverlayView];
+    [self.sceneView addSubview:scanningOverlayView];
     self.scanningOverlayView = scanningOverlayView;
     [scanningOverlayView makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.ARSCNView);
+        make.edges.equalTo(self.sceneView);
     }];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [scanningOverlayView removeFromSuperview];
@@ -211,7 +224,7 @@ typedef NS_ENUM(NSUInteger, MTCoachingState) {
         case ARTrackingStateNormal: {
             NSLog(@"ARTrackingStateNormal")
             if (!self.scan) {
-                self.scan = [[MTScan alloc] initWithSceneView:self.ARSCNView];
+                self.scan = [[MTScan alloc] init:self.sceneView];
             }
         }
             
@@ -221,7 +234,7 @@ typedef NS_ENUM(NSUInteger, MTCoachingState) {
 
 #pragma mark - ARSCNViewDelegate
 - (void)renderer:(id<SCNSceneRenderer>)renderer updateAtTime:(NSTimeInterval)time {
-    ARFrame *frame = self.ARSCNView.session.currentFrame;
+    ARFrame *frame = self.sceneView.session.currentFrame;
     if (!frame) return;
     [self.scan updateOnEveryFrame:frame];
 }

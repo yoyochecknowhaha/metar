@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 import ARKit
 
-class Scan {
+@objc(MTScan)
+@objcMembers class Scan : NSObject {
     
     static let stateChangedNotification = Notification.Name("ScanningStateChanged")
     static let stateUserInfoKey = "ScanState"

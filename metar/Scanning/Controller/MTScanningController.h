@@ -7,9 +7,15 @@
 
 #import "MTBaseController.h"
 
+@class ARSCNView, MTScan;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MTScanningController : MTBaseController
+
+@property (class, nonatomic, strong, nullable) MTScanningController *instance;
+@property (weak, nonatomic) IBOutlet ARSCNView *sceneView;
+@property (nonatomic, strong) MTScan *scan;
 
 @end
 
