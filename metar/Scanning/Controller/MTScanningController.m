@@ -56,6 +56,8 @@ static MTScanningController *_instance = nil;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.state = MTStateStartARSession;
+    
     // nav
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     self.navigationItem.title = @"重建拍摄";
@@ -113,6 +115,11 @@ static MTScanningController *_instance = nil;
     [self.sceneView.session pause];
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    self.screenCenter = self.sceneView.center;
+}
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     switch (self.coachingState) {
         case MTCoachingStatePlane:
@@ -129,7 +136,71 @@ static MTScanningController *_instance = nil;
             // bounding box
             break;
     }
+}
+
+- (void)setState:(MTState)state {
+    MTState newState = state;
+    switch (state) {
+        case MTStateStartARSession:
+            break;
+        case MTStateNotReady: {
+            ARCamera *camera = self.sceneView.session.currentFrame.camera;
+            if (camera) {
+                switch (camera.trackingState) {
+                    case ARTrackingStateNormal:
+                        newState = MTStateScanning;
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                newState = MTStateStartARSession;
+            }
+            break;
+        }
+        case MTStateScanning: {
+            ARCamera *camera = self.sceneView.session.currentFrame.camera;
+            if (camera) {
+                switch (camera.trackingState) {
+                    case ARTrackingStateNormal:
+                        break;
+                    default:
+                        newState = MTStateNotReady;
+                        break;
+                }
+            } else {
+                newState = MTStateStartARSession;
+            }
+            break;
+        }
+        case MTStateTesting:
+            
+            break;
+    }
     
+    switch (newState) {
+        case MTStateStartARSession:
+            NSLog(@"State: Starting ARSession")
+            self.scan = nil;
+            self.sceneView.scene = [SCNScene new];
+            [self startScanning];
+            break;
+        case MTStateNotReady:
+            NSLog(@"State: Not ready to scan")
+            self.scan = nil;
+            break;
+        case MTStateScanning: {
+            NSLog(@"State: Scanning")
+            if (self.scan == nil) {
+                self.scan = [[MTScan alloc] init:self.sceneView];
+//                self.scan
+            }
+            break;
+        }
+        case MTStateTesting:
+            <#code#>
+            break;
+    }
 }
 
 #pragma mark - MTPaperViewDelegate
@@ -225,6 +296,7 @@ static MTScanningController *_instance = nil;
             NSLog(@"ARTrackingStateNormal")
             if (!self.scan) {
                 self.scan = [[MTScan alloc] init:self.sceneView];
+                self.scan.
             }
         }
             

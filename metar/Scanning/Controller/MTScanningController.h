@@ -9,13 +9,22 @@
 
 @class ARSCNView, MTScan;
 
+typedef NS_ENUM(NSUInteger, MTState) {
+    MTStateStartARSession,
+    MTStateNotReady,
+    MTStateScanning,
+    MTStateTesting
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MTScanningController : MTBaseController
 
 @property (class, nonatomic, strong, nullable) MTScanningController *instance;
 @property (weak, nonatomic) IBOutlet ARSCNView *sceneView;
-@property (nonatomic, strong) MTScan *scan;
+@property (nonatomic, strong, nullable) MTScan *scan;
+@property (nonatomic, assign) CGPoint screenCenter;
+@property (nonatomic, assign) MTState state;
 
 @end
 

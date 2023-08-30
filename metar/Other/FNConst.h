@@ -30,6 +30,8 @@ UIKIT_EXTERN NSString *const kPrivateKey;
 UIKIT_EXTERN NSString *const kAccessTokenKey;
 // 查看过引导页标记
 UIKIT_EXTERN NSString *const kDidViewGuideKey;
+// AppState
+UIKIT_EXTERN NSString *const kAppStateUserInfoKey;
 
 
 /**************普通字符串常量**************/
@@ -61,6 +63,8 @@ UIKIT_EXTERN NSString *const kPaperPath;
 
 
 /********************通知***********************/
+// 新增客户上传图片成功通知
+UIKIT_EXTERN NSString *const kAppStateChangedNotification;
 
 
 /************常用的宏************/

@@ -63,7 +63,8 @@ class DetectedObject: SCNNode {
         addChildNode(pointCloudVisualization)
         isHidden = true
         
-        set3DModel(MTScanningController.instance?.modelURL)
+        // 注释
+//        set3DModel(MTScanningController.instance?.modelURL)
     }
     
     required init?(coder aDecoder: NSCoder) {

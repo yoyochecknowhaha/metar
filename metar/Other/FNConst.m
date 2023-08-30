@@ -30,6 +30,8 @@ NSString *const kPrivateKey = @"kPrivateKey";
 NSString *const kAccessTokenKey = @"kAccessTokenKey";
 // 查看过引导页标记
 NSString *const kDidViewGuideKey = @"kDidViewGuideKey";
+// AppState
+NSString *const kAppStateUserInfoKey = @"kAppStateUserInfoKey";
 
 
 /**************普通字符串常量**************/
@@ -61,3 +63,4 @@ NSString *const kPaperPath = @"/app-api/system/calibration-chart/list-by-product
 
 
 /********************通知***********************/
+NSString *const kAppStateChangedNotification = @"kAppStateChangedNotification";
