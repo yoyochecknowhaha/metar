@@ -25,7 +25,7 @@ class BoundingBox: SCNNode {
         }
     }
     
-    override var simdPosition: SIMD3<Float> {
+    @nonobjc override var simdPosition: SIMD3<Float> {
         willSet(newValue) {
             if distance(newValue, simdPosition) > 0.001 {
                 NotificationCenter.default.post(name: BoundingBox.positionChangedNotification,
