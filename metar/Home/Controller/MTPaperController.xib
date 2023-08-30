@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MTPaperController">
+            <connections>
+                <outlet property="bgView" destination="thh-51-C9A" id="2QX-ZN-1CM"/>
+                <outlet property="scrollView" destination="AW3-cm-VA4" id="irg-LO-Vfv"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thh-51-C9A">
+                    <rect key="frame" x="0.0" y="108" width="393" height="524"/>
+                    <subviews>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AW3-cm-VA4">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="524"/>
+                        </scrollView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="thh-51-C9A" secondAttribute="height" multiplier="0.75" id="3XU-jP-1tV"/>
+                        <constraint firstAttribute="bottom" secondItem="AW3-cm-VA4" secondAttribute="bottom" id="4xj-zR-yiU"/>
+                        <constraint firstItem="AW3-cm-VA4" firstAttribute="top" secondItem="thh-51-C9A" secondAttribute="top" id="gOa-Xn-c6B"/>
+                        <constraint firstItem="AW3-cm-VA4" firstAttribute="leading" secondItem="thh-51-C9A" secondAttribute="leading" id="t8q-8d-jMU"/>
+                        <constraint firstAttribute="trailing" secondItem="AW3-cm-VA4" secondAttribute="trailing" id="xRR-QV-R9B"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="thh-51-C9A" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="108" id="CDM-3F-eq1"/>
+                <constraint firstItem="thh-51-C9A" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JNO-Yw-ajw"/>
+                <constraint firstAttribute="trailing" secondItem="thh-51-C9A" secondAttribute="trailing" id="dz9-bp-MNM"/>
+            </constraints>
+            <point key="canvasLocation" x="136.64122137404578" y="19.718309859154932"/>
+        </view>
+    </objects>
+</document>
