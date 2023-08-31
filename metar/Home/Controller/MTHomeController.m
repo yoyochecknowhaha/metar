@@ -20,6 +20,7 @@
 
 // data
 #import "MTHomeData.h"
+#import "metar-Swift.h"
 
 @interface MTHomeController () <UICollectionViewDataSource, UICollectionViewDelegate, MTHideNavigationBar, MTShootResultCellDelegate>
 
@@ -182,7 +183,10 @@
 }
 
 - (IBAction)touchAddBtn:(UIButton *)addBtn {
-    MTScanningController *scanningController = [[MTScanningController alloc] init];
+    ViewController *scanningController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
+//    ViewController *viewController = storyboard.instantiateViewController(withIdentifier: identifier)
+//    ViewController *scanningController = [[ViewController alloc] init];
+//    MTScanningController *scanningController = [[MTScanningController alloc] init];
     [self.navigationController pushViewController:scanningController animated:YES];
 }
 

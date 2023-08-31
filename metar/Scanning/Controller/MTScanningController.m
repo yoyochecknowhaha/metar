@@ -192,8 +192,8 @@ static MTScanningController *_instance = nil;
         case MTStateScanning: {
             NSLog(@"State: Scanning")
             if (self.scan == nil) {
-                self.scan = [[MTScan alloc] init:self.sceneView];
-                self.scan.state = StateReady;
+//                self.scan = [[MTScan alloc] init:self.sceneView];
+//                self.scan.state = StateReady;
             }
             break;
         }
@@ -302,18 +302,18 @@ static MTScanningController *_instance = nil;
                 case MTStateTesting:
                     break;
                 case MTStateScanning: {
-                    if (self.scan) {
-                        switch (self.scan.state) {
-                            case StateReady:
-                                self.state = MTStateNotReady;
-                                break;
-                            case StateDefineBoundingBox:
-                            case StateScanning:
-                            case StateAdjustingOrigin:
-                                NSLog(@"Warning: ARKit is relocalizing")
-                                break;
-                        }
-                    }
+//                    if (self.scan) {
+//                        switch (self.scan.state) {
+//                            case StateReady:
+//                                self.state = MTStateNotReady;
+//                                break;
+//                            case StateDefineBoundingBox:
+//                            case StateScanning:
+//                            case StateAdjustingOrigin:
+//                                NSLog(@"Warning: ARKit is relocalizing")
+//                                break;
+//                        }
+//                    }
                 }
                     
                     break;
@@ -341,7 +341,7 @@ static MTScanningController *_instance = nil;
 - (void)renderer:(id<SCNSceneRenderer>)renderer updateAtTime:(NSTimeInterval)time {
     ARFrame *frame = self.sceneView.session.currentFrame;
     if (!frame) return;
-    [self.scan updateOnEveryFrame:frame];
+//    [self.scan updateOnEveryFrame:frame];
 }
 
 - (void)clear {

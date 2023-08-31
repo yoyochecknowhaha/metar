@@ -9,14 +9,13 @@ import Foundation
 import UIKit
 import ARKit
 
-@objc(MTScan)
-@objcMembers class Scan : NSObject {
+class Scan {
     
     static let stateChangedNotification = Notification.Name("ScanningStateChanged")
     static let stateUserInfoKey = "ScanState"
     static let objectCreationInterval: CFTimeInterval = 1.0
     
-    @objc enum State : Int {
+    enum State {
         case ready
         case defineBoundingBox
         case scanning
@@ -50,12 +49,9 @@ import ARKit
                 Do you want to go back and adjust the bounding box of the scanned object?
                 """
                 let previousState = stateValue
-                // 注释
-                print("\(message)")
-                self.state = previousState
-//                ViewController.instance?.showAlert(title: title, message: message, buttonTitle: "Yes", showCancel: true) { _ in
-//                    self.state = previousState
-//                }
+                ViewController.instance?.showAlert(title: title, message: message, buttonTitle: "Yes", showCancel: true) { _ in
+                    self.state = previousState
+                }
             case .scanning:
                 // When entering the scanning state, take a screenshot of the object to be scanned.
                 // This screenshot will later be saved in the *.arobject file
@@ -67,12 +63,9 @@ import ARKit
                 It is unlikely that a good reference object can be generated.
                 Do you want to go back and continue the scan?
                 """
-                // 注释
-                print("\(message)")
-                self.state = .scanning
-//                ViewController.instance?.showAlert(title: title, message: message, buttonTitle: "Yes", showCancel: true) { _ in
-//                    self.state = .scanning
-//                }
+                ViewController.instance?.showAlert(title: title, message: message, buttonTitle: "Yes", showCancel: true) { _ in
+                    self.state = .scanning
+                }
             case .adjustingOrigin where stateValue == .scanning:
                 if let boundingBox = scannedObject.boundingBox, boundingBox.progressPercentage < 100 {
                     let title = "Scan not complete"
@@ -81,12 +74,9 @@ import ARKit
                     It is likely that it won't detect from all angles.
                     Do you want to go back and continue the scan?
                     """
-                    // 注释
-                    print("\(message)")
-                    self.state = .scanning
-//                    ViewController.instance?.showAlert(title: title, message: message, buttonTitle: "Yes", showCancel: true) { _ in
-//                        self.state = .scanning
-//                    }
+                    ViewController.instance?.showAlert(title: title, message: message, buttonTitle: "Yes", showCancel: true) { _ in
+                        self.state = .scanning
+                    }
                 }
             default:
                 break
@@ -126,8 +116,7 @@ import ARKit
     private var hasWarnedAboutLowLight = false
     
     private var isFirstScan: Bool {
-        return true
-//        return MTScanningController.instance?.referenceObjectToMerge == nil
+        return ViewController.instance?.referenceObjectToMerge == nil
     }
     
     static let minFeatureCount = 100
@@ -138,10 +127,9 @@ import ARKit
         scannedObject = ScannedObject(sceneView)
         pointCloud = ScannedPointCloud()
         
-        super.init()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.applicationStateChanged(_:)),
-                                               name: NSNotification.Name("kAppStateChangedNotification"),
+                                               name: ViewController.appStateChangedNotification,
                                                object: nil)
         
         self.sceneView.scene.rootNode.addChildNode(self.scannedObject)
@@ -155,23 +143,15 @@ import ARKit
     
     @objc
     private func applicationStateChanged(_ notification: Notification) {
-        guard let appStateNumber = notification.userInfo?["kAppStateUserInfoKey"] as? NSNumber else { return }
-                if (appStateNumber == 2){
-                    scannedObject.isHidden = false
-                    pointCloud.isHidden = false
-                }else {
-                    scannedObject.isHidden = true
-                    pointCloud.isHidden = true
-                }
-//        guard let appState = notification.userInfo?[kAppStateUserInfoKey] as? ViewController.State else { return }
-//        switch appState {
-//        case .scanning:
-//            scannedObject.isHidden = false
-//            pointCloud.isHidden = false
-//        default:
-//            scannedObject.isHidden = true
-//            pointCloud.isHidden = true
-//        }
+        guard let appState = notification.userInfo?[ViewController.appStateUserInfoKey] as? ViewController.State else { return }
+        switch appState {
+        case .scanning:
+            scannedObject.isHidden = false
+            pointCloud.isHidden = false
+        default:
+            scannedObject.isHidden = true
+            pointCloud.isHidden = true
+        }
     }
     
     func didOneFingerPan(_ gesture: UIPanGestureRecognizer) {
@@ -368,9 +348,7 @@ import ARKit
                 hasWarnedAboutLowLight = true
                 let title = "Too dark for scanning"
                 let message = "Consider moving to an environment with more light."
-                // 注释
-                print("\(message)")
-//                ViewController.instance?.showAlert(title: title, message: message)
+                ViewController.instance?.showAlert(title: title, message: message)
             }
             
             // Try a preliminary creation of the reference object based off the current
@@ -453,57 +431,57 @@ import ARKit
             return
         }
         
-//        // Extract the reference object based on the position & orientation of the bounding box.
-//        sceneView.session.createReferenceObject(
-//            transform: boundingBox.simdWorldTransform,
-//            center: SIMD3<Float>(), extent: boundingBox.extent,
-//            completionHandler: { object, error in
-//                if let referenceObject = object {
-//                    // Adjust the object's origin with the user-provided transform.
-//                    self.scannedReferenceObject = referenceObject.applyingTransform(origin.simdTransform)
-//                    self.scannedReferenceObject!.name = self.scannedObject.scanName
-//
-//                    if let referenceObjectToMerge = ViewController.instance?.referenceObjectToMerge {
-//                        ViewController.instance?.referenceObjectToMerge = nil
-//
-//                        // Show activity indicator during the merge.
-//                        ViewController.instance?.showAlert(title: "", message: "Merging previous scan into this scan...", buttonTitle: nil)
-//
-//                        // Try to merge the object which was just scanned with the existing one.
-//                        self.scannedReferenceObject?.mergeInBackground(with: referenceObjectToMerge, completion: { (mergedObject, error) in
-//
-//                            if let mergedObject = mergedObject {
-//                                self.scannedReferenceObject = mergedObject
-//                                ViewController.instance?.showAlert(title: "Merge successful",
-//                                                                   message: "The previous scan has been merged into this scan.", buttonTitle: "OK")
-//                                creationFinished(self.scannedReferenceObject)
-//
-//                            } else {
-//                                print("Error: Failed to merge scans. \(error?.localizedDescription ?? "")")
-//                                let message = """
-//                                        Merging the previous scan into this scan failed. Please make sure that
-//                                        there is sufficient overlap between both scans and that the lighting
-//                                        environment hasn't changed drastically.
-//                                        Which scan do you want to use for testing?
-//                                        """
-//                                let thisScan = UIAlertAction(title: "Use This Scan", style: .default) { _ in
-//                                    creationFinished(self.scannedReferenceObject)
-//                                }
-//                                let previousScan = UIAlertAction(title: "Use Previous Scan", style: .default) { _ in
-//                                    self.scannedReferenceObject = referenceObjectToMerge
-//                                    creationFinished(self.scannedReferenceObject)
-//                                }
-//                                ViewController.instance?.showAlert(title: "Merge failed", message: message, actions: [thisScan, previousScan])
-//                            }
-//                        })
-//                    } else {
-//                        creationFinished(self.scannedReferenceObject)
-//                    }
-//                } else {
-//                    print("Error: Failed to create reference object. \(error!.localizedDescription)")
-//                    creationFinished(nil)
-//                }
-//            })
+        // Extract the reference object based on the position & orientation of the bounding box.
+        sceneView.session.createReferenceObject(
+            transform: boundingBox.simdWorldTransform,
+            center: SIMD3<Float>(), extent: boundingBox.extent,
+            completionHandler: { object, error in
+                if let referenceObject = object {
+                    // Adjust the object's origin with the user-provided transform.
+                    self.scannedReferenceObject = referenceObject.applyingTransform(origin.simdTransform)
+                    self.scannedReferenceObject!.name = self.scannedObject.scanName
+                    
+                    if let referenceObjectToMerge = ViewController.instance?.referenceObjectToMerge {
+                        ViewController.instance?.referenceObjectToMerge = nil
+                        
+                        // Show activity indicator during the merge.
+                        ViewController.instance?.showAlert(title: "", message: "Merging previous scan into this scan...", buttonTitle: nil)
+                        
+                        // Try to merge the object which was just scanned with the existing one.
+                        self.scannedReferenceObject?.mergeInBackground(with: referenceObjectToMerge, completion: { (mergedObject, error) in
+
+                            if let mergedObject = mergedObject {
+                                self.scannedReferenceObject = mergedObject
+                                ViewController.instance?.showAlert(title: "Merge successful",
+                                                                   message: "The previous scan has been merged into this scan.", buttonTitle: "OK")
+                                creationFinished(self.scannedReferenceObject)
+
+                            } else {
+                                print("Error: Failed to merge scans. \(error?.localizedDescription ?? "")")
+                                let message = """
+                                        Merging the previous scan into this scan failed. Please make sure that
+                                        there is sufficient overlap between both scans and that the lighting
+                                        environment hasn't changed drastically.
+                                        Which scan do you want to use for testing?
+                                        """
+                                let thisScan = UIAlertAction(title: "Use This Scan", style: .default) { _ in
+                                    creationFinished(self.scannedReferenceObject)
+                                }
+                                let previousScan = UIAlertAction(title: "Use Previous Scan", style: .default) { _ in
+                                    self.scannedReferenceObject = referenceObjectToMerge
+                                    creationFinished(self.scannedReferenceObject)
+                                }
+                                ViewController.instance?.showAlert(title: "Merge failed", message: message, actions: [thisScan, previousScan])
+                            }
+                        })
+                    } else {
+                        creationFinished(self.scannedReferenceObject)
+                    }
+                } else {
+                    print("Error: Failed to create reference object. \(error!.localizedDescription)")
+                    creationFinished(nil)
+                }
+            })
     }
     
     private func createScreenshot() {
