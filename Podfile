@@ -27,4 +27,5 @@ target 'metar' do
   pod 'QMUIKit'
   pod 'YYImage' #展示gif图片
   pod 'YYText'
+  pod 'SnapKit'
 end

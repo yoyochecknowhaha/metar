@@ -318,6 +318,7 @@ PODS:
   - SDWebImage (5.17.0):
     - SDWebImage/Core (= 5.17.0)
   - SDWebImage/Core (5.17.0)
+  - SnapKit (5.6.0)
   - "UITextView+Placeholder (1.4.0)"
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
@@ -333,6 +334,7 @@ DEPENDENCIES:
   - MJRefresh
   - QMUIKit
   - SDWebImage
+  - SnapKit
   - "UITextView+Placeholder"
   - YYImage
   - YYText
@@ -347,6 +349,7 @@ SPEC REPOS:
     - MJRefresh
     - QMUIKit
     - SDWebImage
+    - SnapKit
     - "UITextView+Placeholder"
     - YYImage
     - YYText
@@ -360,10 +363,11 @@ SPEC CHECKSUMS:
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   QMUIKit: 6321cf1124623d686a9ec0a79a7cc59d0d64a52c
   SDWebImage: 750adf017a315a280c60fde706ab1e552a3ae4e9
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   "UITextView+Placeholder": d7b0c400921f66523f3a85d74f774512e14f6502
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 5603c3ec44ca09af828f8a1a81889517a6521eaa
+PODFILE CHECKSUM: a50e783e7e9c7265a9b92d2678267ae5e556cb94
 
 COCOAPODS: 1.11.2
