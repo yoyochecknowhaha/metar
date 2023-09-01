@@ -150,6 +150,17 @@ import SnapKit
         // Make sure the application launches in .startARSession state.
         // Entering this state will run() the ARSession.
         state = .startARSession
+
+        // 加载paper
+        if let paperView = UINib(nibName: "MTPaperView", bundle: nil).instantiate(withOwner: nil).first as? MTPaperView {
+            self.view!.addSubview(paperView)
+            paperView.snp.makeConstraints { make in
+                make.top.equalToSuperview().offset(108)
+                make.left.equalToSuperview()
+                make.right.equalToSuperview()
+                make.bottom.equalToSuperview()
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
