@@ -81,6 +81,42 @@ import ARKit
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 手势
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ViewController.didTap(_:)))
+        tap.delegate = self
+        tap.numberOfTapsRequired = 1
+        tap.numberOfTouchesRequired = 1
+        sceneView.addGestureRecognizer(tap)
+        
+        let onePan = UIPanGestureRecognizer(target: self, action: #selector(ViewController.didOneFingerPan(_:)))
+        onePan.delegate = self
+        onePan.maximumNumberOfTouches = 1
+        onePan.minimumNumberOfTouches = 1
+        sceneView.addGestureRecognizer(onePan)
+        
+        let twoPan = ThresholdPanGestureRecognizer(target: self, action: #selector(ViewController.didTwoFingerPan(_:)))
+        twoPan.delegate = self
+        twoPan.maximumNumberOfTouches = 2
+        twoPan.minimumNumberOfTouches = 2
+        sceneView.addGestureRecognizer(twoPan)
+        
+        let rotation = ThresholdRotationGestureRecognizer(target: self, action: #selector(ViewController.didRotate(_:)))
+        rotation.delegate = self
+        rotation.rotation = 0
+        sceneView.addGestureRecognizer(rotation)
+        
+        let pinch = ThresholdPinchGestureRecognizer(target: self, action: #selector(ViewController.didPinch(_:)))
+        pinch.delegate = self
+        pinch.scale = 1
+        sceneView.addGestureRecognizer(pinch)
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.didLongPress(_:)))
+        longPress.delegate = self
+        longPress.minimumPressDuration = 0.4
+        longPress.numberOfTapsRequired = 0
+        longPress.numberOfTouchesRequired = 1
+        sceneView.addGestureRecognizer(longPress)
+        
         sceneView!.delegate = self
         sceneView!.session.delegate = self
         

@@ -11,7 +11,7 @@
         <!--View Controller-->
         <scene sceneID="Nrb-Rz-UaN">
             <objects>
-                <viewController id="YL1-wS-Udc" customClass="ViewController" customModule="ScanningApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YL1-wS-Udc" customClass="ViewController" customModule="metar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bQ0-E0-1up" customClass="ARSCNView">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -43,7 +43,7 @@
                                     <action selector="nextButtonTapped:" destination="YL1-wS-Udc" eventType="touchUpInside" id="5T7-tF-bWD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYe-EI-wFe" userLabel="Next Button" customClass="RoundedButton" customModule="ScanningApp" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYe-EI-wFe" userLabel="Next Button" customClass="RoundedButton" customModule="metar" customModuleProvider="target">
                                 <rect key="frame" x="146.66666666666666" y="733" width="100" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="U2h-7l-UGM"/>
@@ -65,7 +65,7 @@
                                     <action selector="toggleInstructionsButtonTapped:" destination="YL1-wS-Udc" eventType="touchUpInside" id="pFz-9E-zpO"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6La-2N-vHH" userLabel="? Button" customClass="RoundedButton" customModule="ScanningApp" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6La-2N-vHH" userLabel="? Button" customClass="RoundedButton" customModule="metar" customModuleProvider="target">
                                 <rect key="frame" x="328" y="733" width="45" height="45"/>
                                 <accessibility key="accessibilityConfiguration" label="Toggle instruction label"/>
                                 <constraints>
@@ -93,7 +93,7 @@
                                     <action selector="leftButtonTouchAreaTapped:" destination="YL1-wS-Udc" eventType="touchUpInside" id="MaS-Yg-f2J"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnX-LA-Y5K" userLabel="Load Model" customClass="RoundedButton" customModule="ScanningApp" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnX-LA-Y5K" userLabel="Load Model" customClass="RoundedButton" customModule="metar" customModuleProvider="target">
                                 <rect key="frame" x="20" y="733" width="110" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="110" id="248-bS-W5a"/>
@@ -106,7 +106,7 @@
                                     <action selector="loadModelButtonTapped:" destination="YL1-wS-Udc" eventType="touchUpInside" id="ZS8-HL-sTV"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4s-2c-WjS" userLabel="Flashlight toggle" customClass="FlashlightButton" customModule="ScanningApp" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4s-2c-WjS" userLabel="Flashlight toggle" customClass="FlashlightButton" customModule="metar" customModuleProvider="target">
                                 <rect key="frame" x="20" y="733" width="110" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="110" id="EhT-OQ-Pmr"/>
@@ -163,7 +163,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="16" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8IM-vR-m9b" customClass="MessageLabel" customModule="ScanningApp" customModuleProvider="target">
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8IM-vR-m9b" customClass="MessageLabel" customModule="metar" customModuleProvider="target">
                                                         <rect key="frame" x="8" y="8" width="0.0" height="9"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -278,19 +278,19 @@
                         <outlet property="delegate" destination="YL1-wS-Udc" id="Odm-qP-CJE"/>
                     </connections>
                 </panGestureRecognizer>
-                <panGestureRecognizer minimumNumberOfTouches="2" maximumNumberOfTouches="2" id="WWE-zR-guN" customClass="ThresholdPanGestureRecognizer" customModule="ScanningApp" customModuleProvider="target">
+                <panGestureRecognizer minimumNumberOfTouches="2" maximumNumberOfTouches="2" id="WWE-zR-guN" customClass="ThresholdPanGestureRecognizer" customModule="metar" customModuleProvider="target">
                     <connections>
                         <action selector="didTwoFingerPan:" destination="YL1-wS-Udc" id="tLK-pE-50S"/>
                         <outlet property="delegate" destination="YL1-wS-Udc" id="h9z-XH-ngo"/>
                     </connections>
                 </panGestureRecognizer>
-                <rotationGestureRecognizer id="fg8-fJ-dDt" customClass="ThresholdRotationGestureRecognizer" customModule="ScanningApp" customModuleProvider="target">
+                <rotationGestureRecognizer id="fg8-fJ-dDt" customClass="ThresholdRotationGestureRecognizer" customModule="metar" customModuleProvider="target">
                     <connections>
                         <action selector="didRotate:" destination="YL1-wS-Udc" id="3uN-Aq-gxe"/>
                         <outlet property="delegate" destination="YL1-wS-Udc" id="Euj-SY-iet"/>
                     </connections>
                 </rotationGestureRecognizer>
-                <pinchGestureRecognizer id="QeK-Kd-AhX" customClass="ThresholdPinchGestureRecognizer" customModule="ScanningApp" customModuleProvider="target">
+                <pinchGestureRecognizer id="QeK-Kd-AhX" customClass="ThresholdPinchGestureRecognizer" customModule="metar" customModuleProvider="target">
                     <connections>
                         <action selector="didPinch:" destination="YL1-wS-Udc" id="X0q-KB-dT9"/>
                         <outlet property="delegate" destination="YL1-wS-Udc" id="Sj0-BQ-OP9"/>
