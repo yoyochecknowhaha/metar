@@ -183,10 +183,12 @@
 }
 
 - (IBAction)touchAddBtn:(UIButton *)addBtn {
-    ViewController *scanningController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
+//    ViewController *scanningController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
 //    ViewController *viewController = storyboard.instantiateViewController(withIdentifier: identifier)
 //    ViewController *scanningController = [[ViewController alloc] init];
 //    MTScanningController *scanningController = [[MTScanningController alloc] init];
+    
+    ViewController *scanningController = [[ViewController alloc] init];
     [self.navigationController pushViewController:scanningController animated:YES];
 }
 

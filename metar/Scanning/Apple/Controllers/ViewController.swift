@@ -25,7 +25,7 @@ import ARKit
     @IBOutlet weak var instructionLabel: MessageLabel!
     @IBOutlet weak var loadModelButton: RoundedButton!
     @IBOutlet weak var flashlightButton: FlashlightButton!
-    @IBOutlet weak var navigationBar: UINavigationBar!
+//    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var sessionInfoView: UIVisualEffectView!
     @IBOutlet weak var sessionInfoLabel: UILabel!
     @IBOutlet weak var toggleInstructionsButton: RoundedButton!
