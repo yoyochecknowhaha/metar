@@ -111,6 +111,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zku-Ua-cEp">
+                                        <rect key="frame" x="0.0" y="-1" width="0.0" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="p8z-Ij-CFz">
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -150,7 +151,7 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="2zY-Ob-rmZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0QW-gx-5Yn"/>
                 <constraint firstItem="AM5-8t-FSb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="108" id="Cet-cy-c9d"/>

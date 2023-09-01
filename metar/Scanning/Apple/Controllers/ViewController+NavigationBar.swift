@@ -11,6 +11,20 @@ import UIKit
 extension ViewController {
     
     func setupNavigationBar() {
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "clear"), style: .plain, target: self, action: #selector(clear))
+        navigationItem.title = "重建拍摄"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+//        self.navigationItem.title = @"重建拍摄";
+//        NSDictionary *atts = @{
+//                               NSForegroundColorAttributeName:[UIColor whiteColor]
+//                               };
+//        [[UINavigationBar appearance] setTitleTextAttributes:atts];
+//        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"clear"] style:0 target:self action:@selector(clear)];
+        
+        
+        
 //        backButton = UIBarButtonItem(title: "Back", style: .plain, target: self,
 //                                     action: #selector(previousButtonTapped(_:)))
 //        mergeScanButton = UIBarButtonItem(title: "Merge Scans…", style: .plain, target: self,
@@ -25,6 +39,10 @@ extension ViewController {
 //        navigationBar.setBackgroundImage(UIImage(), for: .default)
 //        navigationBar.shadowImage = UIImage()
 //        navigationBar.isTranslucent = true
+    }
+    
+    func clear() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func showBackButton(_ show: Bool) {
