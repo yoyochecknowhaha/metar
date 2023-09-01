@@ -49,6 +49,7 @@
 		191C73D52AA0A019002D4924 /* DetectedBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191C73B72AA0A019002D4924 /* DetectedBoundingBox.swift */; };
 		191C73D62AA0A019002D4924 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191C73B82AA0A019002D4924 /* Tile.swift */; };
 		191C73D72AA0A019002D4924 /* ObjectOrigin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191C73B92AA0A019002D4924 /* ObjectOrigin.swift */; };
+		192A4AA32AA1B9A700412CC0 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 192A4AA22AA1B9A700412CC0 /* art.scnassets */; };
 		193507B12A76495D00215CB8 /* MTForgetPwdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 193507AF2A76495D00215CB8 /* MTForgetPwdController.m */; };
 		193507B22A76495D00215CB8 /* MTForgetPwdController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 193507B02A76495D00215CB8 /* MTForgetPwdController.xib */; };
 		193507B62A764EB700215CB8 /* MTRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 193507B42A764EB700215CB8 /* MTRegisterController.m */; };
@@ -195,6 +196,7 @@
 		191C73B72AA0A019002D4924 /* DetectedBoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetectedBoundingBox.swift; sourceTree = "<group>"; };
 		191C73B82AA0A019002D4924 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		191C73B92AA0A019002D4924 /* ObjectOrigin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectOrigin.swift; sourceTree = "<group>"; };
+		192A4AA22AA1B9A700412CC0 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		193507AE2A76495D00215CB8 /* MTForgetPwdController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTForgetPwdController.h; sourceTree = "<group>"; };
 		193507AF2A76495D00215CB8 /* MTForgetPwdController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTForgetPwdController.m; sourceTree = "<group>"; };
 		193507B02A76495D00215CB8 /* MTForgetPwdController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MTForgetPwdController.xib; sourceTree = "<group>"; };
@@ -424,6 +426,7 @@
 				19B1F0F52A945A32009AFAA6 /* scanning_gif */,
 				191004E82A82291600C16858 /* guide_gif */,
 				1949D6042A6E6D75001C21E6 /* Assets.xcassets */,
+				192A4AA22AA1B9A700412CC0 /* art.scnassets */,
 				191004FB2A82478600C16858 /* Info.plist */,
 				1949D5EC2A6E6136001C21E6 /* FNConst.h */,
 				1949D5EB2A6E6136001C21E6 /* FNConst.m */,
@@ -1096,6 +1099,7 @@
 				1949D6012A6E6482001C21E6 /* MTGuideController.xib in Resources */,
 				1935F29A2A6E52B500258E47 /* LaunchScreen.storyboard in Resources */,
 				191004F02A82291600C16858 /* guide2.gif in Resources */,
+				192A4AA32AA1B9A700412CC0 /* art.scnassets in Resources */,
 				191004F12A82291600C16858 /* guide0.gif in Resources */,
 				1983CAC62A7619BC001B188B /* ZDWebViewController.xib in Resources */,
 				1967142C2A97716E00596ABC /* scanning.gif in Resources */,
