@@ -8,6 +8,7 @@ Main view controller for the object scanning UI.
 import UIKit
 import SceneKit
 import ARKit
+import SnapKit
 
 @objcMembers class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UIDocumentPickerDelegate, MTPaperViewDelegate {
     
@@ -149,11 +150,6 @@ import ARKit
         // Make sure the application launches in .startARSession state.
         // Entering this state will run() the ARSession.
         state = .startARSession
-        
-        // 添加paper
-//        let paperView = MTPaperView()
-//        paperView.delegate = self
-//        self.view.addSubview(paperView)
     }
     
     override func viewDidLayoutSubviews() {
