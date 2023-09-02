@@ -154,6 +154,7 @@ import SnapKit
         // 加载paper
         if let paperView = UINib(nibName: "MTPaperView", bundle: nil).instantiate(withOwner: nil).first as? MTPaperView {
             self.view!.addSubview(paperView)
+            paperView.delegate = self
             paperView.snp.makeConstraints { make in
                 make.top.equalToSuperview().offset(108)
                 make.left.equalToSuperview()
@@ -169,6 +170,43 @@ import SnapKit
         // Store the screen center location after the view's bounds did change,
         // so it can be retrieved later from outside the main thread.
         screenCenter = sceneView.center
+    }
+    
+    // MARK: - MTPaperViewDelegate
+    func paperViewDidRemoved() {
+        let didShowPlaneCoachingView = FNUserDefault.fn_bool(forKey: "didShowPlaneCoachingView")
+        if !didShowPlaneCoachingView {
+            self.showPlaneCoachingView()
+        }
+    }
+    
+    func showPlaneCoachingView() {
+        if let planeOverlayView = UINib(nibName: "MTCoachingOverlayView", bundle: nil).instantiate(withOwner: nibName).first as? MTCoachingOverlayView {
+            planeOverlayView.imageName = "plane.gif"
+            planeOverlayView.title = "请移动手机开始扫描"
+            sceneView.addSubview(planeOverlayView)
+            planeOverlayView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                planeOverlayView.removeFromSuperview()
+                self.showScanCoachingView()
+            }
+        }
+    }
+    
+    func showScanCoachingView() {
+        if let scanningOverlayView = UINib(nibName: "MTCoachingOverlayView", bundle: nil).instantiate(withOwner: nibName).first as? MTCoachingOverlayView {
+            scanningOverlayView.imageName = "scanning.gif"
+            sceneView.addSubview(scanningOverlayView)
+            scanningOverlayView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                scanningOverlayView.removeFromSuperview()
+                FNUserDefault.fn_setBool(true, forKey: "didShowPlaneCoachingView")
+            }
+        }
     }
     
     // MARK: - UI Event Handling
