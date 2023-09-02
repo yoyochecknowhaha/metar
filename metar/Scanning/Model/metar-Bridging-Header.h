@@ -3,4 +3,8 @@
 //
 #import "MTPaperView.h"
 #import "MTCoachingOverlayView.h"
+#import "MTStep0View.h"
+#import "MTStep1View.h"
+#import "MTStep2View.h"
+#import "MTStep3View.h"
 #import "FNUserDefault.h"

@@ -19,6 +19,7 @@
                 <outlet property="sceneView" destination="AM5-8t-FSb" id="Iam-vh-wCV"/>
                 <outlet property="sessionInfoLabel" destination="WLl-rG-3e0" id="yM9-iL-bb0"/>
                 <outlet property="sessionInfoView" destination="aJ1-Td-HqV" id="Lsm-Dd-pYv"/>
+                <outlet property="stepBgView" destination="2zY-Ob-rmZ" id="sLg-h3-REg"/>
                 <outlet property="toggleInstructionsButton" destination="o4h-71-afp" id="4Cs-Xt-awC"/>
                 <outlet property="view" destination="iN0-l3-epB" id="oK4-Tu-zWW"/>
             </connections>

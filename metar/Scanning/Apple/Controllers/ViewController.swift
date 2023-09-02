@@ -30,6 +30,9 @@ import SnapKit
     @IBOutlet weak var sessionInfoView: UIVisualEffectView!
     @IBOutlet weak var sessionInfoLabel: UILabel!
     @IBOutlet weak var toggleInstructionsButton: RoundedButton!
+    @IBOutlet weak var stepBgView: UIView!
+    
+    var step0View: MTStep0View? = nil
     
     internal var internalState: State = .startARSession
     
@@ -162,6 +165,64 @@ import SnapKit
                 make.bottom.equalToSuperview()
             }
         }
+        
+        // 底部文字提示
+        if let step3View = UINib(nibName: "MTStep3View", bundle: nil).instantiate(withOwner: nil).first as? MTStep3View {
+            self.stepBgView.addSubview(step3View)
+            step3View.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+        }
+        
+        if let step2View = UINib(nibName: "MTStep2View", bundle: nil).instantiate(withOwner: nil).first as? MTStep2View {
+            self.stepBgView.addSubview(step2View)
+            step2View.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+        }
+        
+        if let step1View = UINib(nibName: "MTStep1View", bundle: nil).instantiate(withOwner: nil).first as? MTStep1View {
+            self.stepBgView.addSubview(step1View)
+            step1View.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+        }
+        
+        if let step0View = UINib(nibName: "MTStep0View", bundle: nil).instantiate(withOwner: nil).first as? MTStep0View {
+            self.stepBgView.addSubview(step0View)
+            step0View.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+            self.step0View = step0View
+        }
+        
+        
+        
+//        // 底部文字提示
+//        MTStep3View *step3View = [MTStep3View step3View];
+//        [self.stepBgView addSubview:step3View];
+//        [step3View makeConstraints:^(MASConstraintMaker *make) {
+//            make.edges.equalTo(self.stepBgView);
+//        }];
+//
+//        MTStep2View *step2View = [MTStep2View step2View];
+//        [self.stepBgView addSubview:step2View];
+//        [step2View makeConstraints:^(MASConstraintMaker *make) {
+//            make.edges.equalTo(self.stepBgView);
+//        }];
+//
+//        MTStep1View *step1View = [MTStep1View step1View];
+//        [self.stepBgView addSubview:step1View];
+//        [step1View makeConstraints:^(MASConstraintMaker *make) {
+//            make.edges.equalTo(self.stepBgView);
+//        }];
+//
+//        MTStep0View *step0View = [MTStep0View step0View];
+//        [self.stepBgView addSubview:step0View];
+//        [step0View makeConstraints:^(MASConstraintMaker *make) {
+//            make.edges.equalTo(self.stepBgView);
+//        }];
+//        self.step0View = step0View;
     }
     
     override func viewDidLayoutSubviews() {
